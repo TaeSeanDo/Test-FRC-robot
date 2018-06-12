@@ -28,11 +28,7 @@ public class Robot extends TimedRobot {
     Joystick leftJoystick;
     Joystick rightJoystick;
     
-    Joystick manipulator;
-    
     DriveBase driveBase;
-    
-    VictorSP intake;
 
     /**
      * This function is run when the robot is first started up and should be used for any
@@ -42,11 +38,8 @@ public class Robot extends TimedRobot {
     public void robotInit() {
         leftJoystick = new Joystick(0);
         rightJoystick = new Joystick(1);
-        manipulator = new Joystick(2);
         
         driveBase = new DriveBase(0, 1);
-        
-        intake = new VictorSP(2);
         
         m_chooser.addDefault("Default Auto", kDefaultAuto);
         m_chooser.addObject("My Auto", kCustomAuto);
@@ -94,14 +87,6 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {
         driveBase.drive(leftJoystick.getY(), rightJoystick.getY());
-        
-        if (manipulator.getRawButton(0)) {
-            intake.set(1.0);
-        } else if (manipulator.getRawButton(1)) {
-            intake.set(-1.0);
-        } else {
-            intake.set(0);
-        }
         
 
     }
